@@ -1,0 +1,13 @@
+Para instalar as dependências use
+
+npm i --save
+npm config set strict-ssl false
+npm init
+npm install express --save
+npm install ejs --save
+npm install express-validator --save
+npm install dotenv --save
+npm install nodemailer
+npm install bcryptjs
+npm install bcrypt
+npm install multer

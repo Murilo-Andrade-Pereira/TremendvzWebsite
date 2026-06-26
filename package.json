@@ -1,0 +1,36 @@
+{
+  "name": "tremendvzwebsite",
+  "version": "1.0.0",
+  "description": "Para instalar as dependências use",
+  "keywords": [
+    "node",
+    "app"
+  ],
+  "homepage": "https://github.com/Murilo-Andrade-Pereira/TremendvzWebsite#readme",
+  "bugs": {
+    "url": "https://github.com/Murilo-Andrade-Pereira/TremendvzWebsite/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Murilo-Andrade-Pereira/TremendvzWebsite.git"
+  },
+  "license": "ISC",
+  "author": "Murilo Andrade",
+  "type": "commonjs",
+  "main": "node app",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.2",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.1",
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {}
+}
