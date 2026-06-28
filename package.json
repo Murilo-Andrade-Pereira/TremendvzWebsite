@@ -1,10 +1,11 @@
 {
   "name": "tremendvzwebsite",
   "version": "1.0.0",
-  "description": "Para instalar as dependências use",
+  "description": "Site da banda Tremendvz.",
   "keywords": [
     "node",
-    "app"
+    "express",
+    "ejs"
   ],
   "homepage": "https://github.com/Murilo-Andrade-Pereira/TremendvzWebsite#readme",
   "bugs": {
@@ -17,20 +18,15 @@
   "license": "ISC",
   "author": "Murilo Andrade",
   "type": "commonjs",
-  "main": "node app",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "check": "node --check app.js && node --check app/routes/router.js && node --check app/public/js/index.js",
+    "test": "node --test"
   },
   "dependencies": {
-    "bcrypt": "^6.0.0",
-    "bcryptjs": "^3.0.3",
-    "dotenv": "^17.4.2",
-    "ejs": "^6.0.1",
-    "express": "^5.2.1",
-    "express-validator": "^7.3.2",
-    "multer": "^2.2.0",
-    "nodemailer": "^9.0.1",
-    "readline-sync": "^1.4.10"
-  },
-  "devDependencies": {}
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  }
 }

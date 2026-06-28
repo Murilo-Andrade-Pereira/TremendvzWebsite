@@ -1,0 +1,34 @@
+<%- include('partials/head', { pageTitle, bodyClass: 'gallery-page' }) %>
+<%- include('partials/nav', { activePage }) %>
+
+<main id="conteudo" class="section page-main">
+  <header class="page-header" data-motion="fade-up">
+    <p class="section-label">Arquivo Visual</p>
+    <h1 class="section-title">Galeria</h1>
+    <div class="gold-line"></div>
+    <p class="page-lead">Fotos oficiais e registros selecionados. A publicação de novas imagens ficará reservada ao ADM da página.</p>
+  </header>
+
+  <% if (albums.length === 0) { %>
+    <section class="empty-state" data-motion="scale-in">
+      <img src="/images/logo-tremendvz.png" alt="TREMENDVZ">
+      <strong>Galeria em curadoria</strong>
+      <p>Nenhuma foto publicada ainda. Quando o painel de ADM existir, a página poderá receber novos registros sem expor upload público.</p>
+    </section>
+  <% } %>
+
+  <% albums.forEach((galleryAlbum, albumIndex) => { %>
+    <section class="album-gallery" data-motion="fade-up" style="--delay: <%= albumIndex * 70 %>ms">
+      <h2><%= galleryAlbum.name %></h2>
+      <div class="photo-grid">
+        <% galleryAlbum.photos.forEach((photo) => { %>
+          <a class="photo-tile" href="<%= photo %>" target="_blank" rel="noreferrer">
+            <img src="<%= photo %>" alt="Foto do álbum <%= galleryAlbum.name %>" loading="lazy">
+          </a>
+        <% }) %>
+      </div>
+    </section>
+  <% }) %>
+</main>
+
+<%- include('partials/footer') %>

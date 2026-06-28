@@ -1,13 +1,31 @@
-Para instalar as dependências use
+# TremendvzWebsite
 
-npm i --save
-npm config set strict-ssl false
-npm init
-npm install express --save
-npm install ejs --save
-npm install express-validator --save
-npm install dotenv --save
-npm install nodemailer
-npm install bcryptjs
-npm install bcrypt
-npm install multer
+Site em Node.js, Express e EJS para a banda Tremendvz.
+
+## Como rodar
+
+```bash
+npm install
+npm start
+```
+
+Depois acesse:
+
+```text
+http://localhost:3000
+```
+
+## Páginas
+
+- `/` - início
+- `/album` - álbum Glória e Sangue
+- `/discografia` - discografia em blocos
+- `/banda` - informações da banda
+- `/galeria` - galeria pública sem upload
+
+## Verificações
+
+```bash
+npm run check
+npm test
+```

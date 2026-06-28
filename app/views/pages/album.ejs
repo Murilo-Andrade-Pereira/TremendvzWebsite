@@ -1,0 +1,55 @@
+<%- include('partials/head', { pageTitle, bodyClass: 'album-page' }) %>
+<%- include('partials/nav', { activePage }) %>
+
+<main id="conteudo" class="section page-main">
+  <section class="release-section page-surface">
+    <div class="release-grid">
+      <div class="album-art-wrap" data-motion="scale-in">
+        <div class="album-art album-cover">
+          <img src="<%= album.cover %>" alt="Capa do álbum <%= album.title %>" width="1600" height="1600">
+          <div class="album-badge"><%= album.type %></div>
+        </div>
+      </div>
+
+      <div class="release-info" data-motion="fade-up" style="--delay: 80ms">
+        <div>
+          <p class="section-label">Último Lançamento</p>
+          <h1 class="section-title"><%= album.title %></h1>
+          <div class="gold-line"></div>
+          <p class="page-lead"><%= album.description %></p>
+        </div>
+
+        <div class="release-meta-row" aria-label="Detalhes do lançamento">
+          <span><%= album.year %></span>
+          <span><%= album.type %></span>
+          <span><%= album.tracks.length %> faixas</span>
+        </div>
+
+        <div id="now-playing" class="active-track-banner" aria-live="polite">
+          <div class="pulse" aria-hidden="true"></div>
+          <span class="active-track-title" id="now-playing-title"></span>
+        </div>
+
+        <ol class="tracklist" id="tracklist">
+          <% album.tracks.forEach((track, index) => { %>
+            <li class="track" tabindex="0" role="button" data-track="<%= track %>" onclick="selectTrack(this)" onkeydown="handleTrackKey(event, this)">
+              <span class="track-num"><%= String(index + 1).padStart(2, '0') %></span>
+              <span class="track-name"><%= track %></span>
+              <span class="track-play" aria-hidden="true">▶</span>
+              <span class="track-bar" aria-hidden="true"></span>
+            </li>
+          <% }) %>
+        </ol>
+
+        <div class="streaming-links" aria-label="Links de streaming">
+          <a class="stream-btn" href="https://open.spotify.com" target="_blank" rel="noreferrer">Spotify</a>
+          <a class="stream-btn" href="https://music.youtube.com" target="_blank" rel="noreferrer">YouTube Music</a>
+          <a class="stream-btn" href="https://music.apple.com" target="_blank" rel="noreferrer">Apple Music</a>
+          <a class="stream-btn" href="https://www.deezer.com" target="_blank" rel="noreferrer">Deezer</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer') %>

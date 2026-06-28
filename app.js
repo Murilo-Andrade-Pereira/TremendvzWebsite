@@ -1,46 +1,34 @@
-  const express = require('express');
-  const path = require('path');
-  const multer = require('multer');
-  const fs = require('fs');
+const express = require('express');
+const path = require('path');
 
-  const app = express();
-  const PORT = 3000;
+const app = express();
+const PORT = process.env.PORT || 3000;
+const APP_DIR = path.join(__dirname, 'app');
 
-  // View engine
-  app.set('view engine', 'ejs');
-  app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.set('views', path.join(APP_DIR, 'views', 'pages'));
 
-  // Static files
-  app.use(express.static(path.join(__dirname, 'public')));
-  app.use(express.urlencoded({ extended: true }));
-  app.use(express.json());
+app.use(express.static(path.join(APP_DIR, 'public')));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-  // Multer config for gallery uploads
-  const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      const albumName = req.body.albumName || 'default';
-      const albumPath = path.join(__dirname, 'public', 'images', 'gallery', albumName);
-      fs.mkdirSync(albumPath, { recursive: true });
-      cb(null, albumPath);
-    },
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + '-' + file.originalname);
-    }
-  });
-  const upload = multer({ storage });
+const router = require('./app/routes/router');
 
-  // Routes
-  const homeRouter = require('./routes/home');
-  const galleryRouter = require('./routes/gallery');
+app.use('/', router);
 
-  app.use('/', homeRouter);
-  app.use('/galeria', galleryRouter);
+app.use((req, res) => {
+  res.status(404).send('Pagina nao encontrada.');
+});
 
-  // Upload route
-  app.post('/galeria/upload', upload.array('fotos', 50), (req, res) => {
-    res.redirect('/galeria');
-  });
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).send('Erro interno no servidor.');
+});
 
+if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`🎸 Tremendvz rodando em http://localhost:${PORT}`);
+    console.log(`Tremendvz rodando em http://localhost:${PORT}`);
   });
+}
+
+module.exports = app;

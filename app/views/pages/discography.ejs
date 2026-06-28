@@ -1,0 +1,44 @@
+<%- include('partials/head', { pageTitle, bodyClass: 'discography-page' }) %>
+<%- include('partials/nav', { activePage }) %>
+
+<main id="conteudo" class="section page-main">
+  <header class="page-header" data-motion="fade-up">
+    <p class="section-label">Catálogo</p>
+    <h1 class="section-title">Discografia</h1>
+    <div class="gold-line"></div>
+    <p class="page-lead">Lançamentos longos abrem suas faixas em acordeão. Singles ficam diretos, rápidos de reconhecer e acessar.</p>
+  </header>
+
+  <div class="discography-grid">
+    <% discography.forEach((release, releaseIndex) => { %>
+      <% if (release.tracks.length > 0) { %>
+        <article class="discography-card" data-motion="fade-up" style="--delay: <%= releaseIndex * 70 %>ms">
+          <button class="release-toggle" type="button" data-discography-toggle aria-expanded="false">
+            <img src="<%= release.cover %>" alt="Capa de <%= release.title %>" loading="lazy">
+            <span class="release-meta"><%= release.type %> · <%= release.year %></span>
+            <strong><%= release.title %></strong>
+            <span class="release-description"><%= release.description %></span>
+            <span class="release-action">Ver músicas</span>
+          </button>
+          <ol class="release-tracks" hidden>
+            <% release.tracks.forEach((track, index) => { %>
+              <li>
+                <span><%= String(index + 1).padStart(2, '0') %></span>
+                <strong><%= track %></strong>
+              </li>
+            <% }) %>
+          </ol>
+        </article>
+      <% } else { %>
+        <article class="discography-card single-release" data-motion="fade-up" style="--delay: <%= releaseIndex * 70 %>ms">
+          <img src="<%= release.cover %>" alt="Arte de <%= release.title %>" loading="lazy">
+          <span class="release-meta"><%= release.type %> · <%= release.year %></span>
+          <strong><%= release.title %></strong>
+          <span class="release-description"><%= release.description %></span>
+        </article>
+      <% } %>
+    <% }) %>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

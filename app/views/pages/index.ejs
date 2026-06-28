@@ -1,172 +1,64 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TREMENDVZ - Heavy Metal Brasil</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;700;900&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/index.css">
-</head>
-<body>
+<%- include('partials/head', { pageTitle, bodyClass: 'home-page' }) %>
+<%- include('partials/nav', { activePage }) %>
 
-  <nav>
-    <div class="nav-logo">TREMENDVZ</div>
-    <ul class="nav-links">
-      <li><a href="#release">Álbum</a></li>
-      <li><a href="#music">Músicas</a></li>
-      <li><a href="#about">Banda</a></li>
-    </ul>
-  </nav>
-
+<main id="conteudo">
   <section class="hero">
-    <div class="hero-bg"></div>
-    <canvas id="sparks"></canvas>
-    <div class="hero-content">
-      <p class="band-eyebrow">Heavy Metal ✦ Brasil</p>
-      <h1 class="band-name">TREMENDVZ</h1>
+    <div class="hero-bg" aria-hidden="true"></div>
+    <canvas id="sparks" aria-hidden="true"></canvas>
+    <div class="hero-frame" data-motion="fade-up">
+      <p class="band-eyebrow">Heavy Metal • Brasil</p>
+      <h1 class="band-name">
+        <img src="/images/logo-tremendvz.png" alt="TREMENDVZ">
+      </h1>
       <p class="band-subtitle">Não sou conduzido, conduzo</p>
-      <div class="hero-divider"></div>
+      <div class="hero-divider" aria-hidden="true"></div>
       <div class="hero-cta">
-        <button class="btn-primary" onclick="document.getElementById('release').scrollIntoView({behavior:'smooth'})">Último Lançamento</button>
-        <button class="btn-secondary" onclick="document.getElementById('music').scrollIntoView({behavior:'smooth'})">Discografia</button>
+        <a class="btn-primary" href="/album">Último Lançamento</a>
+        <a class="btn-secondary" href="/discografia">Explorar Discografia</a>
+      </div>
+    </div>
+    <div class="hero-status" data-motion="fade-up" style="--delay: 120ms">
+      <span>Glória e Sangue</span>
+      <span>2025</span>
+      <span>5 faixas</span>
+    </div>
+  </section>
+
+  <section class="section home-preview" aria-labelledby="home-sections">
+    <div class="section-shell">
+      <div class="section-heading" data-motion="fade-up">
+        <p class="section-label">Arquivo Oficial</p>
+        <h2 id="home-sections" class="section-title">Escolha o portal</h2>
+      </div>
+
+      <div class="preview-grid">
+        <a class="feature-card feature-card-wide" href="/album" data-motion="fade-up" style="--delay: 40ms">
+          <img src="<%= album.cover %>" alt="Capa do álbum <%= album.title %>">
+          <span class="feature-kicker">Último Lançamento</span>
+          <strong><%= album.title %></strong>
+          <span><%= album.type %> · <%= album.year %></span>
+        </a>
+
+        <a class="feature-card" href="/discografia" data-motion="fade-up" style="--delay: 90ms">
+          <span class="feature-kicker">Catálogo</span>
+          <strong>Discografia em blocos</strong>
+          <span>Álbuns abrem suas faixas; singles ficam diretos.</span>
+        </a>
+
+        <a class="feature-card" href="/banda" data-motion="fade-up" style="--delay: 140ms">
+          <span class="feature-kicker">Manifesto</span>
+          <strong>Forja brasileira de heavy metal</strong>
+          <span>Guerra, honra e intensidade humana.</span>
+        </a>
+
+        <a class="feature-card" href="/galeria" data-motion="fade-up" style="--delay: 190ms">
+          <span class="feature-kicker">Visual</span>
+          <strong>Galeria oficial</strong>
+          <span>Registros publicados somente pela administração.</span>
+        </a>
       </div>
     </div>
   </section>
+</main>
 
-  <section class="section" id="release">
-    <div class="release-section">
-      <div class="release-grid">
-        <div class="album-art-wrap">
-          <div class="album-art">
-            <div class="album-art-inner">
-              <div class="album-art-symbol">⚔</div>
-              <div class="album-art-title">GLÓRIA E SANGUE</div>
-              <div class="album-art-subtitle">TREMENDVZ · 2025</div>
-            </div>
-            <div class="album-badge">Novo Álbum</div>
-          </div>
-        </div>
-        <div class="release-info">
-          <div>
-            <p class="section-label">Último Lançamento</p>
-            <h2 class="section-title">Glória e Sangue</h2>
-            <div class="gold-line"></div>
-          </div>
-          
-          <div id="now-playing" class="active-track-banner">
-            <div class="pulse"></div>
-            <span class="active-track-title" id="now-playing-title"></span>
-          </div>
-
-          <ul class="tracklist" id="tracklist">
-            <li class="track" data-track="Torture, Perpetual Darkness and Pain" onclick="selectTrack(this)">
-              <span class="track-num">I</span>
-              <span class="track-name">Torture, Perpetual Darkness and Pain</span>
-              <div class="track-play">▶</div>
-              <div class="track-bar"></div>
-            </li>
-            <li class="track" data-track="Before The Atrocious Power Of My Sword" onclick="selectTrack(this)">
-              <span class="track-num">II</span>
-              <span class="track-name">Before The Atrocious Power Of My Sword</span>
-              <div class="track-play">▶</div>
-              <div class="track-bar"></div>
-            </li>
-            <li class="track" data-track="NON DVCOR DVCO" onclick="selectTrack(this)">
-              <span class="track-num">III</span>
-              <span class="track-name">NON DVCOR DVCO</span>
-              <div class="track-play">▶</div>
-              <div class="track-bar"></div>
-            </li>
-            <li class="track" data-track="Weeping and Gnashing of Teeth" onclick="selectTrack(this)">
-              <span class="track-num">IV</span>
-              <span class="track-name">Weeping and Gnashing of Teeth</span>
-              <div class="track-play">▶</div>
-              <div class="track-bar"></div>
-            </li>
-            <li class="track" data-track="Glória e Sangue" onclick="selectTrack(this)">
-              <span class="track-num">V</span>
-              <span class="track-name">Glória e Sangue</span>
-              <div class="track-play">▶</div>
-              <div class="track-bar"></div>
-            </li>
-          </ul>
-
-          <div class="streaming-links">
-            <div class="stream-btn">Spotify</div>
-            <div class="stream-btn">YouTube Music</div>
-            <div class="stream-btn">Apple Music</div>
-            <div class="stream-btn">Deezer</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section about-section" id="about">
-    <div class="about-inner">
-      <p class="section-label" style="text-align:center">A Banda</p>
-      <p class="about-quote">"<em>Non Dvcor, Dvco.</em><br>Não sou conduzido — conduzo."</p>
-      <div class="gold-line" style="margin:0 auto 2rem"></div>
-      <p class="about-body">TREMENDVZ é uma banda brasileira de heavy metal que forja um som épico e visceral, ancorado em líricas de guerra, honra e intensidade humana. Composições de Luiz Gustavo Tavares, as músicas transitam entre o latim clássico e o inglês, invocando a tradição dos guerreiros imortais — aqueles que não são conduzidos, mas que conduzem.</p>
-    </div>
-  </section>
-
-  <section class="section" id="music">
-    <div class="songs-section">
-      <p class="section-label">Discografia</p>
-      <h2 class="section-title">Todas as Músicas</h2>
-      <div class="gold-line"></div>
-      
-      <div class="songs-grid">
-        <div class="song-card" onclick="alert('Buscando informações sobre: Torture, Perpetual Darkness and Pain')">
-          <div class="song-card-num">01</div>
-          <div class="song-card-title">Torture, Perpetual Darkness and Pain</div>
-          <div class="song-card-subtitle">Faixa 1 · Álbum Glória e Sangue</div>
-          <div class="song-card-icon">↗</div>
-        </div>
-        <div class="song-card" onclick="alert('Buscando informações sobre: Before The Atrocious Power Of My Sword')">
-          <div class="song-card-num">02</div>
-          <div class="song-card-title">Before The Atrocious Power Of My Sword</div>
-          <div class="song-card-subtitle">Faixa 2 · Álbum Glória e Sangue</div>
-          <div class="song-card-icon">↗</div>
-        </div>
-        <div class="song-card" onclick="alert('Buscando informações sobre: NON DVCOR DVCO')">
-          <div class="song-card-num">03</div>
-          <div class="song-card-title">NON DVCOR DVCO</div>
-          <div class="song-card-subtitle">Não sou conduzido, conduzo</div>
-          <div class="song-card-icon">↗</div>
-        </div>
-        <div class="song-card" onclick="alert('Buscando informações sobre: Weeping and Gnashing of Teeth')">
-          <div class="song-card-num">04</div>
-          <div class="song-card-title">Weeping and Gnashing of Teeth</div>
-          <div class="song-card-subtitle">Faixa 4 · Álbum Glória e Sangue</div>
-          <div class="song-card-icon">↗</div>
-        </div>
-        <div class="song-card" onclick="alert('Buscando informações sobre: Glória e Sangue')">
-          <div class="song-card-num">05</div>
-          <div class="song-card-title">Glória e Sangue</div>
-          <div class="song-card-subtitle">Faixa Principal · Álbum Glória e Sangue</div>
-          <div class="song-card-icon">↗</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-logo">TREMENDVZ</div>
-    <p class="footer-tagline">Non Dvcor, Dvco · Heavy Metal · Brasil</p>
-    <div class="footer-social">
-      <span class="social-link">Instagram</span>
-      <span class="social-link">YouTube</span>
-      <span class="social-link">Spotify</span>
-      <span class="social-link">Letras.mus.br</span>
-    </div>
-    <p class="footer-copy">© 2025 TREMENDVZ · Luiz Gustavo Tavares · Todos os direitos reservados</p>
-  </footer>
-
-  <script src="/js/index.js"></script>
-</body>
-</html>
-
+<%- include('partials/footer') %>

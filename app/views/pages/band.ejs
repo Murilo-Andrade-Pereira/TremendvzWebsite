@@ -1,0 +1,34 @@
+<%- include('partials/head', { pageTitle, bodyClass: 'band-page' }) %>
+<%- include('partials/nav', { activePage }) %>
+
+<main id="conteudo" class="section page-main">
+  <section class="about-section page-panel page-surface" data-motion="fade-up">
+    <div class="about-inner">
+      <p class="section-label section-label-centered">A Banda</p>
+      <h1 class="section-title">TREMENDVZ</h1>
+      <p class="about-quote">"<em>Non Dvcor, Dvco.</em><br>Não sou conduzido, conduzo."</p>
+      <div class="gold-line gold-line-centered"></div>
+      <p class="about-body">TREMENDVZ é uma banda brasileira de heavy metal que forja um som épico e visceral, ancorado em líricas de guerra, honra e intensidade humana. Composições de Luiz Gustavo Tavares, as músicas transitam entre o latim clássico e o inglês, invocando a tradição dos guerreiros imortais: aqueles que não são conduzidos, mas que conduzem.</p>
+    </div>
+  </section>
+
+  <section class="manifest-grid" aria-label="Pilares da banda">
+    <article class="manifest-card" data-motion="fade-up" style="--delay: 60ms">
+      <span>01</span>
+      <strong>Som Épico</strong>
+      <p>Riffs densos, marcha pesada e atmosfera de batalha.</p>
+    </article>
+    <article class="manifest-card" data-motion="fade-up" style="--delay: 120ms">
+      <span>02</span>
+      <strong>Lírica de Honra</strong>
+      <p>Latim, inglês e português como lâminas narrativas.</p>
+    </article>
+    <article class="manifest-card" data-motion="fade-up" style="--delay: 180ms">
+      <span>03</span>
+      <strong>Identidade Medieval</strong>
+      <p>Visual austero, brasão em fogo e presença de palco ritualística.</p>
+    </article>
+  </section>
+</main>
+
+<%- include('partials/footer') %>
