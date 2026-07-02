@@ -1,64 +1,393 @@
-<%- include('partials/head', { pageTitle, bodyClass: 'home-page' }) %>
-<%- include('partials/nav', { activePage }) %>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TREMENDVZ — Heavy Metal Brasileiro. Forjado em guerra, honra e intensidade humana.">
+  <title>TREMENDVZ — Não sou conduzido, conduzo</title>
 
-<main id="conteudo">
-  <section class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <canvas id="sparks" aria-hidden="true"></canvas>
-    <div class="hero-frame" data-motion="fade-up">
-      <p class="band-eyebrow">Heavy Metal • Brasil</p>
-      <h1 class="band-name">
-        <img src="/images/logo-tremendvz.png" alt="TREMENDVZ">
-      </h1>
-      <p class="band-subtitle">Não sou conduzido, conduzo</p>
-      <div class="hero-divider" aria-hidden="true"></div>
-      <div class="hero-cta">
-        <a class="btn-primary" href="/album">Último Lançamento</a>
-        <a class="btn-secondary" href="/discografia">Explorar Discografia</a>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor-blade"></div>
+  </div>
+
+  <!-- NAV -->
+  <header class="site-nav" id="site-nav" role="banner">
+    <a class="nav-logo" href="/" aria-label="TREMENDVZ — Página inicial">
+      <span class="logo-text">TREMENDVZ</span>
+    </a>
+
+    <nav aria-label="Navegação principal">
+      <ul class="nav-links" role="list">
+        <li><a href="/" class="nav-link active" aria-current="page"><span>Início</span></a></li>
+        <li><a href="/album" class="nav-link"><span>Lançamento</span></a></li>
+        <li><a href="/discografia" class="nav-link"><span>Discografia</span></a></li>
+        <li><a href="/banda" class="nav-link"><span>Banda</span></a></li>
+        <li><a href="/galeria" class="nav-link"><span>Galeria</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-right">
+      <a href="/album" class="nav-cta">
+        <span>Ouvir Agora</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1"/>
+          <polygon points="5.5,4.5 9.5,7 5.5,9.5" fill="currentColor"/>
+        </svg>
+      </a>
+      <button class="nav-mobile-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-drawer" aria-label="Abrir menu">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Menu de navegação" aria-hidden="true">
+    <button class="drawer-close" id="drawer-close" aria-label="Fechar menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <ul class="drawer-links" role="list">
+      <li><a href="/" class="drawer-item">
+        <span class="drawer-num">01</span>
+        <span class="drawer-label">Início</span>
+      </a></li>
+      <li><a href="/album" class="drawer-item">
+        <span class="drawer-num">02</span>
+        <span class="drawer-label">Lançamento</span>
+      </a></li>
+      <li><a href="/discografia" class="drawer-item">
+        <span class="drawer-num">03</span>
+        <span class="drawer-label">Discografia</span>
+      </a></li>
+      <li><a href="/banda" class="drawer-item">
+        <span class="drawer-num">04</span>
+        <span class="drawer-label">Banda</span>
+      </a></li>
+      <li><a href="/galeria" class="drawer-item">
+        <span class="drawer-num">05</span>
+        <span class="drawer-label">Galeria</span>
+      </a></li>
+    </ul>
+    <div class="drawer-footer">
+      <span class="drawer-footer-text">Heavy Metal · Brasil · Est. MMX</span>
+    </div>
+  </div>
+  <div class="drawer-backdrop" id="drawer-backdrop" aria-hidden="true"></div>
+
+  <main id="conteudo">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+
+      <!-- Background layers -->
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-img-wrap">
+          <img src="/images/gloria-e-sangue.jpg" alt="" class="hero-bg-img" loading="eager">
+        </div>
+        <div class="hero-overlay-gradient"></div>
+        <div class="hero-blade-line"></div>
+        <div class="hero-noise"></div>
+      </div>
+
+      <!-- Spark canvas -->
+      <canvas id="sparks" aria-hidden="true"></canvas>
+
+      <!-- Content -->
+      <div class="hero-content">
+
+        <!-- Eyebrow row -->
+        <div class="hero-eyebrow" data-animate="fade-up" data-delay="0">
+          <span class="eyebrow-chip">Heavy Metal</span>
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          <span class="eyebrow-text">Brasil · Est. MMX</span>
+        </div>
+
+        <!-- Main title -->
+        <div class="hero-title-wrap" id="hero-title" data-animate="split-reveal" data-delay="200">
+          <div class="hero-title-line">
+            <span class="ht-char" style="--i:0">T</span><span class="ht-char" style="--i:1">R</span><span class="ht-char" style="--i:2">E</span><span class="ht-char" style="--i:3">M</span><span class="ht-char" style="--i:4">E</span><span class="ht-char" style="--i:5">N</span><span class="ht-char" style="--i:6">D</span><span class="ht-char" style="--i:7">V</span><span class="ht-char" style="--i:8">Z</span>
+          </div>
+        </div>
+
+        <!-- Tagline -->
+        <p class="hero-tagline" data-animate="fade-up" data-delay="700">
+          <em class="tagline-em">Não sou conduzido</em>
+          <span class="tagline-sep" aria-hidden="true">—</span>
+          <span class="tagline-main">conduzo.</span>
+        </p>
+
+        <!-- CTAs -->
+        <div class="hero-cta-row" data-animate="fade-up" data-delay="900">
+          <a class="btn-forge" href="/album">
+            <span class="btn-forge-inner">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/>
+                <polygon points="6.5,5.5 11,8 6.5,10.5" fill="currentColor"/>
+              </svg>
+              Último Lançamento
+            </span>
+            <span class="btn-forge-track" aria-hidden="true"></span>
+          </a>
+          <a class="btn-ghost" href="/discografia">
+            <span>Explorar Discografia</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 5l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Info strip -->
+        <div class="hero-strip" data-animate="fade-up" data-delay="1100">
+          <div class="strip-item">
+            <span class="strip-pulse" aria-hidden="true"></span>
+            <span class="strip-val">Glória e Sangue</span>
+          </div>
+          <span class="strip-sep" aria-hidden="true">/</span>
+          <div class="strip-item">
+            <span class="strip-val">2025</span>
+          </div>
+          <span class="strip-sep" aria-hidden="true">/</span>
+          <div class="strip-item">
+            <span class="strip-val">5 Faixas</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Scroll cue -->
+      <div class="scroll-cue" aria-hidden="true" data-animate="fade-up" data-delay="1400">
+        <div class="scroll-cue-inner">
+          <span class="scroll-label">Rolar</span>
+          <div class="scroll-track">
+            <div class="scroll-fill"></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-inner">
+        <div class="marquee-track">
+          <span>TREMENDVZ</span><span class="m-gem">✦</span>
+          <span>HEAVY METAL</span><span class="m-gem">✦</span>
+          <span>GLÓRIA E SANGVE</span><span class="m-gem">✦</span>
+          <span>BRASIL</span><span class="m-gem">✦</span>
+          <span>FORJADO EM GVERRA</span><span class="m-gem">✦</span>
+          <span>TREMENDVZ</span><span class="m-gem">✦</span>
+          <span>HEAVY METAL</span><span class="m-gem">✦</span>
+          <span>GLÓRIA E SANGVE</span><span class="m-gem">✦</span>
+          <span>BRASIL</span><span class="m-gem">✦</span>
+          <span>FORJADO EM GVERRA</span><span class="m-gem">✦</span>
+        </div>
       </div>
     </div>
-    <div class="hero-status" data-motion="fade-up" style="--delay: 120ms">
-      <span>Glória e Sangue</span>
-      <span>2025</span>
-      <span>5 faixas</span>
-    </div>
-  </section>
 
-  <section class="section home-preview" aria-labelledby="home-sections">
-    <div class="section-shell">
-      <div class="section-heading" data-motion="fade-up">
-        <p class="section-label">Arquivo Oficial</p>
-        <h2 id="home-sections" class="section-title">Escolha o portal</h2>
+    <!-- PORTALS -->
+    <section class="portals" aria-labelledby="portals-heading">
+      <div class="portals-shell">
+
+        <header class="portals-header">
+          <span class="section-eyebrow" data-reveal>Arquivo Oficial</span>
+          <h2 class="section-title" id="portals-heading" data-reveal>
+            Escolha o portal
+          </h2>
+          <p class="section-lead" data-reveal>
+            Navega pelo arsenal completo — do último lançamento ao manifesto que nos move.
+          </p>
+        </header>
+
+        <div class="portals-grid">
+
+          <!-- Album — wide card -->
+          <a class="portal-card portal-card--wide" href="/album" aria-label="Último Lançamento — Glória e Sangue, álbum 2025" data-reveal data-reveal-delay="0">
+            <div class="portal-img-wrap">
+              <img src="/images/gloria-e-sangue.jpg" alt="Capa do álbum Glória e Sangue" loading="lazy" class="portal-img">
+              <div class="portal-img-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="portal-body">
+              <span class="portal-kicker">Último Lançamento</span>
+              <strong class="portal-title">Glória e Sangue</strong>
+              <span class="portal-meta">Álbum · 2025</span>
+            </div>
+            <div class="portal-arrow">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="portal-glow" aria-hidden="true"></div>
+          </a>
+
+          <!-- Discografia -->
+          <a class="portal-card" href="/discografia" data-reveal data-reveal-delay="80">
+            <div class="portal-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <circle cx="14" cy="14" r="12" stroke="currentColor" stroke-width="1"/>
+                <circle cx="14" cy="14" r="4" stroke="currentColor" stroke-width="1"/>
+                <path d="M14 2v4M14 22v4M2 14h4M22 14h4" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="portal-body portal-body--solo">
+              <span class="portal-kicker">Catálogo</span>
+              <strong class="portal-title">Discografia</strong>
+              <p class="portal-desc">Álbuns abrem suas faixas — singles ficam diretos.</p>
+            </div>
+            <div class="portal-arrow">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="portal-glow" aria-hidden="true"></div>
+          </a>
+
+          <!-- Banda -->
+          <a class="portal-card" href="/banda" data-reveal data-reveal-delay="160">
+            <div class="portal-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <path d="M4 24C4 18.477 8.477 14 14 14s10 4.477 10 10" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <circle cx="14" cy="8" r="4" stroke="currentColor" stroke-width="1"/>
+              </svg>
+            </div>
+            <div class="portal-body portal-body--solo">
+              <span class="portal-kicker">Manifesto</span>
+              <strong class="portal-title">A Banda</strong>
+              <p class="portal-desc">Guerra, honra e intensidade humana.</p>
+            </div>
+            <div class="portal-arrow">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="portal-glow" aria-hidden="true"></div>
+          </a>
+
+          <!-- Galeria -->
+          <a class="portal-card" href="/galeria" data-reveal data-reveal-delay="240">
+            <div class="portal-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <rect x="3" y="6" width="22" height="16" rx="1" stroke="currentColor" stroke-width="1"/>
+                <path d="M3 18l6-6 4 4 3-3 6 6" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9.5" cy="11.5" r="1.5" stroke="currentColor" stroke-width="1"/>
+              </svg>
+            </div>
+            <div class="portal-body portal-body--solo">
+              <span class="portal-kicker">Visual</span>
+              <strong class="portal-title">Galeria</strong>
+              <p class="portal-desc">Registros publicados pela administração oficial.</p>
+            </div>
+            <div class="portal-arrow">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="portal-glow" aria-hidden="true"></div>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MANIFESTO -->
+    <section class="manifesto" aria-labelledby="manifesto-title">
+      <div class="manifesto-shell">
+
+        <div class="manifesto-blade" aria-hidden="true"></div>
+
+        <div class="manifesto-content">
+          <span class="section-eyebrow section-eyebrow--center" data-reveal>Manifesto</span>
+
+          <blockquote class="manifesto-quote" id="manifesto-title" data-reveal>
+            <div class="mq-line">
+              <span class="mq-word">Não</span>
+              <span class="mq-word mq-word--dim">sou</span>
+              <span class="mq-word mq-word--dim">conduzido,</span>
+            </div>
+            <div class="mq-line mq-line--accent">
+              <span class="mq-word">conduzo.</span>
+            </div>
+          </blockquote>
+
+          <p class="manifesto-body" data-reveal>
+            TREMENDVZ não é um projeto — é um estado de guerra permanente contra a mediocridade.
+            Forjados no heavy metal brasileiro, cada nota é um decreto.
+          </p>
+
+          <a class="btn-text-link" href="/banda" data-reveal>
+            <span>Ler manifesto completo</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-shell">
+
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="footer-logo-text">TREMENDVZ</span>
+          <p class="footer-tagline">Glória e Sangue · Heavy Metal Brasileiro</p>
+        </div>
+
+        <nav class="footer-nav" aria-label="Links do rodapé">
+          <a href="/album">Lançamento</a>
+          <a href="/discografia">Discografia</a>
+          <a href="/banda">Banda</a>
+          <a href="/galeria">Galeria</a>
+          
+        </nav>
+
+        <nav class="footer-social" aria-label="Redes sociais">
+          <a class="social-btn" href="#" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a class="social-btn" href="#" aria-label="YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M22 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C15.6 2.8 12 2.8 12 2.8s-3.6 0-5.8.1c-.6.1-1.9.1-3 1.3C2.3 5 2 7 2 7S1.8 9.3 1.8 11.5v2.1C1.8 15.8 2 18 2 18s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C8.8 22.1 12 22.1 12 22.1s3.6 0 5.8-.2c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.2-2.3.2-4.5v-2.2C22.2 9.3 22 7 22 7z"/>
+              <polygon points="9.8,15.2 15.7,12 9.8,8.8" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a class="social-btn" href="#" aria-label="Spotify">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 15s1.5-1 4-1 4.5 1 4.5 1M7.5 12s2-1.5 4.5-1.5S16.5 12 16.5 12M8 9s1.5-1 4-1 4.5 1 4.5 1"/>
+            </svg>
+          </a>
+        </nav>
       </div>
 
-      <div class="preview-grid">
-        <a class="feature-card feature-card-wide" href="/album" data-motion="fade-up" style="--delay: 40ms">
-          <img src="<%= album.cover %>" alt="Capa do álbum <%= album.title %>">
-          <span class="feature-kicker">Último Lançamento</span>
-          <strong><%= album.title %></strong>
-          <span><%= album.type %> · <%= album.year %></span>
-        </a>
-
-        <a class="feature-card" href="/discografia" data-motion="fade-up" style="--delay: 90ms">
-          <span class="feature-kicker">Catálogo</span>
-          <strong>Discografia em blocos</strong>
-          <span>Álbuns abrem suas faixas; singles ficam diretos.</span>
-        </a>
-
-        <a class="feature-card" href="/banda" data-motion="fade-up" style="--delay: 140ms">
-          <span class="feature-kicker">Manifesto</span>
-          <strong>Forja brasileira de heavy metal</strong>
-          <span>Guerra, honra e intensidade humana.</span>
-        </a>
-
-        <a class="feature-card" href="/galeria" data-motion="fade-up" style="--delay: 190ms">
-          <span class="feature-kicker">Visual</span>
-          <strong>Galeria oficial</strong>
-          <span>Registros publicados somente pela administração.</span>
-        </a>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 TREMENDVZ. Todos os direitos reservados.</p>
+        <span class="footer-sep" aria-hidden="true">◆</span>
+        <p class="footer-copy">Forjado em guerra e honra.</p> 
       </div>
-    </div>
-  </section>
-</main>
 
-<%- include('partials/footer') %>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
